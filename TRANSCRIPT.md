@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f | 2026-10-20T19:02:38.205Z -->
 ## Session `1509da45`, 2026-10-20 19:02:38
 
-*7 user turns. Tool outputs and reasoning omitted.*
+*9 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -119,5 +119,62 @@ The second half of your answer mostly repeats my description of how embedding se
 
 **User:**
 In vague description we are less likely to have a one to one match on name of characters, or place in the movie, therefore the embedding search does a better job at matching the closest results to each other than a direct comparison.
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Refresh transcript, commit Part 0, and push
+- 🔧 `Read`: /Users/logan/Documents/GitHub/comp440-retrieval/tfidf_settings.py
+```
+### Vague descriptions: which method will do better, and why?
+
+In vague description we are less likely to have a one to one match on name of characters, or place in the movie, therefore the embedding search does a better job at matching the closest results to each other than a direct comparison.
+```
+
+```
+$ python3 dump_transcript.py && git add WRITEUP.md && git commit -m "Part 0 done" && git push
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main 1c2052e] Part 0 done
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+To https://github.com/Nadizdom34/comp440-retrieval.git
+   8ddbec7..1c2052e  main -> main
+```
+
+Setup is done, and your predictions are saved on GitHub.
+
+**Part 1: Build the TF-IDF model (about 6 minutes).** Most people finish Part 3 or 4 in class. Anything left is due 8:00am Thursday, October 22.
+
+`tfidf_settings.py` has three settings. Words are always lowercased, so "Dog" and "dog" count as one word.
+
+1. **`REMOVE_STOP_WORDS`**: True or False. **Now: False.** When True, it drops about 300 common English words before scoring. For example, "the dog ate the bone" becomes "dog ate bone". The list comes from scikit-learn, and it covers more than words like "the" and "of". It also drops "bill", "fire", "name" and "system", plus the number words "one" to "twelve" (but not "seven").
+
+2. **`MIN_MOVIES`**: any whole number, 1 or more. **Now: 1.** It keeps only the words that show up in at least that many movies' plot summaries. If it's 3 and the made-up name "Zorblax" appears in only one summary, "Zorblax" is dropped. A value of 1 is the only one that keeps a word found in just one summary.
+
+3. **`REPEATS_COUNT_LESS`**: True or False. **Now: False.** When True, a word that appears several times in one summary counts as 1 + log(count) instead of its full count. So 4 appearances count as about 2.4 instead of 4. When False, a word said 4 times counts 4 times.
+
+What are your three choices? Give one reason for each, all in one reply. A sentence per setting is enough.
+
+**User:**
+what do you mean by my three choices?
+
+**Claude:**
+Each setting has a value, and you pick it. So your three choices are:
+
+1. `REMOVE_STOP_WORDS`: True or False?
+2. `MIN_MOVIES`: 1, or some higher whole number?
+3. `REPEATS_COUNT_LESS`: True or False?
+
+You can keep the value a setting has now. That still counts as a choice, so it needs a reason too.
+
+Your reasons go into your writeup. Then I change the file to your values, and later searches use them.
+
+Please reply with all three values, each with a short reason. A sentence per setting is enough.
+
+**User:**
+Yes remove the stop words because it will make it easier to compare words that are shared between the question and the plot summary, I think the min_movies should be minimum of 3 movies because this feels like a fairly low threshold that would not remove many highly relevant words but, also would keep some names of characters that might appear in sequels or more. The repeats_counts_less should be turned on because it does not add value to count one word multiple times, such as if a word was bike and it appeared multiple times would not add to the compare analysis
+
+**Claude:**
+- 🔧 `Bash`: Set the three TF-IDF settings to the chosen values
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
 
 <!-- end-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f -->
