@@ -58,7 +58,7 @@ Looking through the few misses of my choice they all have in common that they ar
 
 ### What is a sentence embedding, in your own words?
 
-XXXX
+A sentence embedding is when you take words in a question and assign them a number and do the same for another sentence and then rank them based on the numbers for comparison. An example is the question 2, where I described the movie Frozen but I believe that the rankings were very far off because it focused on the ranking of indiviudal words in comparison to the plot summary rankings
 
 ### Where does each method do better, and why?
 
