@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f | 2026-10-20T19:02:38.205Z -->
 ## Session `1509da45`, 2026-10-20 19:02:38
 
-*9 user turns. Tool outputs and reasoning omitted.*
+*13 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -176,5 +176,126 @@ Yes remove the stop words because it will make it easier to compare words that a
 **Claude:**
 - 🔧 `Bash`: Set the three TF-IDF settings to the chosen values
 - 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Commit Part 1, push, and check the template for updates
+Here are the settings as `tfidf_settings.py` now has them:
+
+```
+REMOVE_STOP_WORDS = True
+MIN_MOVIES = 3
+REPEATS_COUNT_LESS = True
+```
+
+The slot now reads:
+
+```
+### The settings you chose, and why
+
+- `REMOVE_STOP_WORDS = True`: because it will make it easier to compare words that are shared between the question and the plot summary
+- `MIN_MOVIES = 3`: because this feels like a fairly low threshold that would not remove many highly relevant words but, also would keep some names of characters that might appear in sequels or more
+- `REPEATS_COUNT_LESS = True`: because it does not add value to count one word multiple times, such as if a word was bike and it appeared multiple times would not add to the compare analysis
+```
+
+```
+$ python3 dump_transcript.py && git add WRITEUP.md tfidf_settings.py && git commit -m "Part 1 done" && git push
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main 44e95f8] Part 1 done
+ 2 files changed, 6 insertions(+), 4 deletions(-)
+To https://github.com/Nadizdom34/comp440-retrieval.git
+   1c2052e..44e95f8  main -> main
+```
+
+Part 1 is saved on GitHub. The template has no updates.
+
+**Part 2: Top terms (about 6 minutes).** The packages are installed, so this is ready to run.
+
+Which two movies do you know well? The ones you rated in HW1 are in the collection.
+
+**User:**
+I know the movie White Chicks and 21 Jump Street well
+
+**Claude:**
+- 🔧 `Bash`: Show top TF-IDF terms for the two movies
+```
+White Chicks (2004): the 15 words with the highest TF-IDF weight in its plot summary.
+
+     word               weight  count here  movies
+  1. marcus              0.341           2       8
+  2. kevin               0.317           2      14
+  3. socialites          0.224           1       3
+  4. refuse              0.208           1       6
+  5. disfigured          0.201           1       8
+  6. bust                0.201           1       8
+  7. transforming        0.196           1      10
+  8. fired               0.196           1      10
+  9. accept              0.196           1      10
+ 10. foil                0.193           1      11
+ 11. pose                0.193           1      11
+ 12. sisters             0.179           1      19
+ 13. avoid               0.171           1      26
+ 14. girls               0.159           1      39
+ 15. brothers            0.158           1      41
+
+count here: how many times the word is in this plot summary. movies: how many of the 4,309 plot summaries have it.
+
+The plot summary: Two FBI agent brothers, Marcus and Kevin Copeland, accidentally foil a drug bust. To avoid being fired they accept a mission escorting a pair of socialites to the Hamptons--but when the girls are disfigured in a car accident, they refuse to go. Left without options, Marcus and Kevin decide to pose as the sisters, transforming themselves from black men into rich white women.
+
+Your settings: REMOVE_STOP_WORDS = True, MIN_MOVIES = 3, REPEATS_COUNT_LESS = True.
+```
+
+```
+21 Jump Street (2012): the 15 words with the highest TF-IDF weight in its plot summary.
+
+     word               weight  count here  movies
+  1. students            0.291           2      46
+  2. high                0.270           3     189
+  3. school              0.261           3     217
+  4. jock                0.242           1       4
+  5. synthetic           0.231           1       6
+  6. infiltrate          0.217           1      10
+  7. graduation          0.217           1      10
+  8. joined              0.214           1      11
+  9. ended               0.212           1      12
+ 10. unit                0.210           1      13
+ 11. partners            0.208           1      14
+ 12. riding              0.208           1      14
+ 13. ring                0.187           1      28
+ 14. drugs               0.186           1      29
+ 15. park                0.185           1      30
+
+count here: how many times the word is in this plot summary. movies: how many of the 4,309 plot summaries have it.
+
+The plot summary: In high school, Schmidt was a dork and Jenko was the popular jock. After graduation, both of them joined the police force and ended up as partners riding bicycles in the city park. Since they are young and look like high school students, they are assigned to an undercover unit to infiltrate a drug ring that is supplying high school students synthetic drugs.
+
+Your settings: REMOVE_STOP_WORDS = True, MIN_MOVIES = 3, REPEATS_COUNT_LESS = True.
+```
+
+For each movie, what do the top terms get right and wrong about what makes it distinctive? A sentence or two per movie is enough.
+
+**User:**
+Do i have to talk about the top 15 ?
+
+**Claude:**
+No, you don't need to go through all 15. Talk about whichever words you notice, whether that's a few at the top or a few you think are missing. The question is how well the list as a whole captures what makes each movie different from the others.
+
+For each movie, what do the top terms get right and wrong about what makes it distinctive? A sentence or two per movie is enough.
+
+**User:**
+I think for white chicks the words marcus and kevin are correct and sisters are correct but the words brothers and socialities are decieviing because the plot is about sisters and socialities does not seem very reflective of the plot
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+The slot now reads:
+
+```
+White Chicks: I think for white chicks the words marcus and kevin are correct and sisters are correct but the words brothers and socialities are decieviing because the plot is about sisters and socialities does not seem very reflective of the plot
+
+21 Jump Street: XXXX
+```
+
+Now 21 Jump Street: what do its top terms get right and wrong about what makes it distinctive? A sentence or two is enough.
+
+**User:**
+for the second movie I think that students, jock, partners, drugs are very descriptive but the words joined and park are not very reflective of the plot summary, overall I think they did a better job for top words in 21 Jump Street
 
 <!-- end-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f -->
