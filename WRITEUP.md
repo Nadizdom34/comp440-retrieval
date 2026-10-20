@@ -36,11 +36,13 @@ White Chicks: I think for white chicks the words marcus and kevin are correct an
 
 ### Your questions, as you typed them
 
-XXXX
+1. what is the movie about kids traveling with their moms boyfriend to get reunited with their mother and its focused on a roadtrip
+2. two sisters one who has white hair and superpower with winter and the other is a regular red hair sister and they are royal princesses, with a snowman also
+3. their is a skeleton that hates christmas and plans to have revenge on the town, similiar to the grinch and their is a ghost dog that is his companian, it is based on a halloween and christmas movie
 
 ### Did the movies you meant come up? What did TF-IDF get right and wrong?
 
-XXXX
+For my first two questions, the movie I was thinking about did not come up in the top 10, for the first question I was referencing the movie Are we there yet?, and the second movie was about the movie Frozen and this selection of top 10 movies were alot less related to the first search question. Finally, for the third question the movie I referenced came onto the first spot in the top 10, so maybe it was due to have more clarity in the plot
 
 ## Part 4: The question bank
 
