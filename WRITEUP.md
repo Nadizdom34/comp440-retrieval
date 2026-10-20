@@ -28,7 +28,9 @@ In vague description we are less likely to have a one to one match on name of ch
 
 ### Your movies: what do the top terms get right and wrong about what makes each one distinctive?
 
-XXXX
+White Chicks: I think for white chicks the words marcus and kevin are correct and sisters are correct but the words brothers and socialities are decieviing because the plot is about sisters and socialities does not seem very reflective of the plot
+
+21 Jump Street: for the second movie I think that students, jock, partners, drugs are very descriptive but the words joined and park are not very reflective of the plot summary, overall I think they did a better job for top words in 21 Jump Street
 
 ## Part 3: Your own searches
 
