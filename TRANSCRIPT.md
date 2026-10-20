@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f | 2026-10-20T19:02:38.205Z -->
 ## Session `1509da45`, 2026-10-20 19:02:38
 
-*13 user turns. Tool outputs and reasoning omitted.*
+*18 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -297,5 +297,133 @@ Now 21 Jump Street: what do its top terms get right and wrong about what makes i
 
 **User:**
 for the second movie I think that students, jock, partners, drugs are very descriptive but the words joined and park are not very reflective of the plot summary, overall I think they did a better job for top words in 21 Jump Street
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Commit Part 2, push, and check the template for updates
+The slot now reads:
+
+```
+White Chicks: I think for white chicks the words marcus and kevin are correct and sisters are correct but the words brothers and socialities are decieviing because the plot is about sisters and socialities does not seem very reflective of the plot
+
+21 Jump Street: for the second movie I think that students, jock, partners, drugs are very descriptive but the words joined and park are not very reflective of the plot summary, overall I think they did a better job for top words in 21 Jump Street
+```
+
+```
+$ python3 dump_transcript.py && git add WRITEUP.md tfidf_settings.py && git commit -m "Part 2 done" && git push
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main 687ddc6] Part 2 done
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+To https://github.com/Nadizdom34/comp440-retrieval.git
+   44e95f8..687ddc6  main -> main
+```
+
+Part 2 is saved on GitHub. The template has no updates.
+
+**Part 3: Your own searches (about 7 minutes).** You'll run three searches with TF-IDF.
+
+What's your first question? For example, describe a movie you know in your own words, without its title. I'll run it exactly as you type it.
+
+**User:**
+My first question is what is the movie about kids traveling with their moms boyfriend to get reunited with their mother and its focused on a roadtrip
+
+**Claude:**
+- 🔧 `Bash`: Search with the first question using TF-IDF
+```
+Question: what is the movie about kids traveling with their moms boyfriend to get reunited with their mother and its focused on a roadtrip
+
+TF-IDF, top 10:
+   1. 0.237  Kid, The (1921)   matched: reunited, mother
+   2. 0.216  A Frozen Flower (2008)   matched: focused
+   3. 0.175  Pay It Forward (2000)   matched: kids
+   4. 0.170  Sabrina (1995)   matched: focused
+   5. 0.149  Stagecoach (1939)   matched: traveling
+   6. 0.136  Divine Secrets of the Ya-Ya Sisterhood (2002)   matched: mother
+   7. 0.134  Way, Way Back, The (2013)   matched: boyfriend, mother
+   8. 0.130  Finding Dory (2016)   matched: reunited
+   9. 0.124  Captain Fantastic (2016)   matched: kids
+  10. 0.124  Parent Trap, The (1961)   matched: reunited, mother
+      Ignored as stop words: what, is, the, about, with, their, to, get, and, its, on.
+      Not in the vocabulary (in fewer than 3 summaries, or none): moms, roadtrip.
+```
+
+I ran it starting from "what is the movie...", without your lead-in "My first question is". The "matched" column lists the question's words that are also in each movie's summary.
+
+What's your second question?
+
+**User:**
+are my second question supposed to help the movies search
+
+**Claude:**
+No. Each question is its own search, separate from the others. Your second question doesn't add to the first one or fix it.
+
+It can be about the same movie or a different one, whichever you prefer. The README suggests trying different kinds of questions: "a detail, the plot retold, something vague".
+
+What's your second question?
+
+**User:**
+two sisters one who has white hair and superpower with winter and the other is a regular red hair sister and they are royal princesses, with a snowman also
+
+**Claude:**
+- 🔧 `Bash`: Search with the second question using TF-IDF
+```
+Question: two sisters one who has white hair and superpower with winter and the other is a regular red hair sister and they are royal princesses, ...
+
+TF-IDF, top 10:
+   1. 0.216  Modesty Blaise (1966)   matched: hair
+   2. 0.190  Blue Is the Warmest Color (La vie d'Adèle) (2013)   matched: hair
+   3. 0.176  Royal Tenenbaums, The (2001)   matched: royal, winter
+   4. 0.174  Village of the Damned (1960)   matched: hair
+   5. 0.153  Donnie Brasco (1997)   matched: regular
+   6. 0.147  Amityville Horror, The (2005)   matched: hair
+   7. 0.135  White Christmas (1954)   matched: sisters, sister
+   8. 0.134  Little Women (2019)   matched: sisters
+   9. 0.124  Cook the Thief His Wife & Her Lover, The (1989)   matched: regular
+  10. 0.123  Sydney (Hard Eight) (1996)   matched: regular
+      Ignored as stop words: two, one, who, has, and, with, the, other, is, they, are, also.
+      Not in the vocabulary (in fewer than 3 summaries, or none): superpower, princesses, snowman.
+```
+
+The script shortens the question in the first line, but it searched the whole thing.
+
+What's your third question?
+
+**User:**
+their is a skeleton that hates christmas and plans to have revenge on the town, similiar to the grinch and their is a ghost dog that is his companian, it is based on a halloween and christmas movie
+
+**Claude:**
+- 🔧 `Bash`: Search with the third question using TF-IDF
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+```
+Question: their is a skeleton that hates christmas and plans to have revenge on the town, similiar to the grinch and their is a ghost dog ...
+
+TF-IDF, top 10:
+   1. 0.285  Nightmare Before Christmas, The (1993)   matched: christmas, halloween, plans, town
+   2. 0.235  How the Grinch Stole Christmas! (1966)   matched: christmas, dog
+   3. 0.191  Charlie Brown Christmas, A (1965)   matched: christmas
+   4. 0.184  Ref, The (1994)   matched: christmas
+   5. 0.177  Mixed Nuts (1994)   matched: christmas
+   6. 0.174  Hachiko: A Dog's Story (a.k.a. Hachi: A Dog's Tale) (2009)   matched: dog, based
+   7. 0.157  Stalag 17 (1953)   matched: christmas
+   8. 0.153  State and Main (2000)   matched: movie, town
+   9. 0.151  Jingle All the Way (1996)   matched: christmas, town
+  10. 0.143  Scream 4 (2011)   matched: ghost, town
+      Ignored as stop words: their, is, that, and, to, have, on, the, his, it.
+      Not in the vocabulary (in fewer than 3 summaries, or none): skeleton, similiar, grinch, companian.
+```
+
+I wrote your three questions into the slot, word for word:
+
+```
+1. what is the movie about kids traveling with their moms boyfriend to get reunited with their mother and its focused on a roadtrip
+2. two sisters one who has white hair and superpower with winter and the other is a regular red hair sister and they are royal princesses, with a snowman also
+3. their is a skeleton that hates christmas and plans to have revenge on the town, similiar to the grinch and their is a ghost dog that is his companian, it is based on a halloween and christmas movie
+```
+
+Last question for Part 3: did the movies you had in mind come up, and what did TF-IDF get right and wrong? A sentence or two is enough.
+
+**User:**
+For my first two questions, the movie I was thinking about did not come up in the top 10, for the first question I was referencing the movie Are we there yet?, and the second movie was about the movie Frozen and this selection of top 10 movies were alot less related to the first search question. Finally, for the third question the movie I referenced came onto the first spot in the top 10, so maybe it was due to have more clarity in the plot
 
 <!-- end-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f -->
