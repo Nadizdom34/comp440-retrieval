@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f | 2026-10-20T19:02:38.205Z -->
 ## Session `1509da45`, 2026-10-20 19:02:38
 
-*20 user turns. Tool outputs and reasoning omitted.*
+*25 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -494,5 +494,121 @@ Look through a few misses of your choice. Then tell me what they have in common.
 
 **User:**
 Looking through the few misses of my choice they all have in common that they are very brief usually one to two sentences and they are not formatted as questions but rather as statements.
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Commit Part 4 with TF-IDF results, push, check template
+- 🔧 `Bash`: Run the question bank with embeddings
+The slot now reads:
+
+```
+Looking through the few misses of my choice they all have in common that they are very brief usually one to two sentences and they are not formatted as questions but rather as statements.
+```
+
+One way this could mislead you: many of the hits may also be short statements, so the pattern only means something if the hits look different.
+
+```
+$ python3 dump_transcript.py && git add WRITEUP.md tfidf_settings.py results/tfidf.json && git commit -m "Part 4 done" && git push
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main 835ff04] Part 4 done
+ 2 files changed, 56680 insertions(+), 2 deletions(-)
+ create mode 100644 results/tfidf.json
+To https://github.com/Nadizdom34/comp440-retrieval.git
+   e0ab703..835ff04  main -> main
+```
+
+Part 4 is saved on GitHub. The template has no updates.
+
+**Part 5: Embeddings (about 12 minutes).** The model finished downloading during setup. I've started the question bank with embeddings, which takes a minute or so.
+
+While that runs: on October 1, GloVe gave each word a list of numbers. Words used in similar contexts got similar lists. A sentence model does the same thing for a whole sentence or plot summary. It turns all of it into one list of 384 numbers. Two texts that mean similar things get lists that are close together, even when they share few words. Search then ranks the movies whose summary's list is closest to the question's list.
+
+Ask anything you'd like about this. Then: **what is a sentence embedding, in your own words?** Use one of your own Part 3 questions or movies as the example. A sentence or two is enough.
+
+**User:**
+<task-notification>
+<task-id>byk0si61z</task-id>
+<tool-use-id>toolu_01VGGJaCXnYwQJVnngr9ZSAf</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-logan-Documents-GitHub-comp440-retrieval/1509da45-7e0b-4b7a-8ea5-2836f1df810f/tasks/byk0si61z.output</output-file>
+<status>completed</status>
+<summary>Background command "Run the question bank with embeddings" completed (exit code 0)</summary>
+</task-notification>
+
+**Claude:**
+- 🔧 `Read`: /private/tmp/claude-501/-Users-logan-Documents-GitHub-comp440-retrieval/1509da45-7e0b-4b7a-8ea5-2...
+The embedding run finished. Its last line:
+
+```
+Saved every question's top 10 in results/embed.json. To look through them: uv run python site.py
+```
+
+I'll show the full scores once your sentence-embedding answer is in the writeup.
+
+**User:**
+A sentence embedding is when you take words in a question and assign them a number and do the same for another sentence and then rank them based on the numbers for comparison
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+The slot now reads:
+
+```
+A sentence embedding is when you take words in a question and assign them a number and do the same for another sentence and then rank them based on the numbers for comparison
+```
+
+The question also asks for an example from one of your own Part 3 questions or movies. Which one would you use, and how would it work? A sentence is enough, and I'll add it after what you wrote.
+
+**User:**
+An example is the question 2, where I described the movie Frozen but I believe that the rankings were very far off because it focused on the ranking of indiviudal words in comparison to the plot summary rankings
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+The slot now reads:
+
+```
+A sentence embedding is when you take words in a question and assign them a number and do the same for another sentence and then rank them based on the numbers for comparison. An example is the question 2, where I described the movie Frozen but I believe that the rankings were very far off because it focused on the ranking of indiviudal words in comparison to the plot summary rankings
+```
+
+One fact for context: your Part 3 searches used only TF-IDF. Nothing has run them with embeddings yet. You can change this slot whenever you like.
+
+Here are the embedding scores:
+
+```
+Embedding 518 questions. This can take a minute.
+Ran 518 questions against 4,309 movies in 7 seconds.
+
+Embeddings put the right movie first for 31 of 100 written questions and in the top 10 for 59.
+  Of the 34 detail questions, they put 24 first and 31 in the top 10.
+  Of the 33 reworded questions, they put 4 first and 18 in the top 10.
+  Of the 33 vague questions, they put 3 first and 10 in the top 10.
+They put the right movie first for 32 of 418 real requests and in the top 10 for 81.
+
+The embedding model reads only about the first 200 words of a question, so it ignored the end of 62 of the 418 real requests.
+
+Saved every question's top 10 in results/embed.json. To look through them: uv run python site.py
+```
+
+Please reload http://localhost:8765. It now shows both methods. The Show menu has three new choices, each with its count: "TF-IDF did better", "Embeddings did better" and "Both missed". Look at one question from "TF-IDF did better" and one from "Embeddings did better", any you like.
+
+If you want, I can also rerun your three Part 3 questions with both methods.
+
+Tell me when you've looked.
+
+**User:**
+open this in a new browser
+
+**Claude:**
+- 🔧 `Bash`: Open the comparison site in the browser
+I opened http://localhost:8765 in a new browser tab. The command printed nothing, which is normal.
+
+It should show both methods now. If it shows only TF-IDF, reload the page.
+
+From the Show menu, look at one question under "TF-IDF did better" and one under "Embeddings did better", any you like. Tell me when you've looked.
+
+**User:**
+push what I have so far because I will take a break
+
+**Claude:**
+- 🔧 `Skill`: save
 
 <!-- end-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f -->
