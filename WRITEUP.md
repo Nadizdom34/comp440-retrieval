@@ -10,11 +10,11 @@ Part 0 predictions stay as you first wrote them; Part 5 asks what you would chan
 
 ### Questions that name a character, place or thing: which method will do better, and why?
 
-XXXX
+The method that will perform better is keyword search as it directly scores a movie by the words and thus if we are given a name of something then we can more likely match it to see which words are shared between plot summary and my question.
 
 ### Vague descriptions: which method will do better, and why?
 
-XXXX
+In vague description we are less likely to have a one to one match on name of characters, or place in the movie, therefore the embedding search does a better job at matching the closest results to each other than a direct comparison.
 
 ## Part 1: Build the TF-IDF model
 
