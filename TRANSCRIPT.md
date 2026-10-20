@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f | 2026-10-20T19:02:38.205Z -->
 ## Session `1509da45`, 2026-10-20 19:02:38
 
-*18 user turns. Tool outputs and reasoning omitted.*
+*20 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -425,5 +425,74 @@ Last question for Part 3: did the movies you had in mind come up, and what did T
 
 **User:**
 For my first two questions, the movie I was thinking about did not come up in the top 10, for the first question I was referencing the movie Are we there yet?, and the second movie was about the movie Frozen and this selection of top 10 movies were alot less related to the first search question. Finally, for the third question the movie I referenced came onto the first spot in the top 10, so maybe it was due to have more clarity in the plot
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Commit Part 3, push, and check the template for updates
+- 🔧 `Bash`: Run the question bank with TF-IDF
+The slot now reads:
+
+```
+For my first two questions, the movie I was thinking about did not come up in the top 10, for the first question I was referencing the movie Are we there yet?, and the second movie was about the movie Frozen and this selection of top 10 movies were alot less related to the first search question. Finally, for the third question the movie I referenced came onto the first spot in the top 10, so maybe it was due to have more clarity in the plot
+```
+
+```
+$ python3 dump_transcript.py && git add WRITEUP.md tfidf_settings.py && git commit -m "Part 3 done" && git push
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main e0ab703] Part 3 done
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+To https://github.com/Nadizdom34/comp440-retrieval.git
+   687ddc6..e0ab703  main -> main
+```
+
+Part 3 is saved on GitHub. The template has no updates.
+
+**Part 4: The question bank (about 9 minutes).** This runs TF-IDF on all 518 questions, each with a known right movie:
+
+```
+TF-IDF, with your settings: REMOVE_STOP_WORDS = True, MIN_MOVIES = 3, REPEATS_COUNT_LESS = True.
+Ran 518 questions against 4,309 movies in under a second.
+
+TF-IDF put the right movie first for 15 of 100 written questions and in the top 10 for 30.
+  Of the 34 detail questions, it put 15 first and 29 in the top 10.
+  Of the 33 reworded questions, it put 0 first and 1 in the top 10.
+  Of the 33 vague questions, it put 0 first and 0 in the top 10.
+It put the right movie first for 18 of 418 real requests and in the top 10 for 64.
+
+Saved every question's top 10 in results/tfidf.json. To look through them: uv run python site.py
+```
+
+Which kind of question did TF-IDF handle best, and which worst? By how much? A sentence or two is enough.
+
+**User:**
+The best result was out of the detail questions that were handled the best, as out of 34 detailed question it put 15 first and 29 in the top 10, and the worst that it handled was the reworded question because out of 33, it put 0 first and 1 in the top 10.
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Start the comparison site
+- 🔧 `Bash`: Read README's Part 4 description of the site
+- 🔧 `Bash`: Read the rest of README Part 4 and the site's output
+- 🔧 `Read`: /private/tmp/claude-501/-Users-logan-Documents-GitHub-comp440-retrieval/1509da45-7e0b-4b7a-8ea5-2...
+The slot now reads:
+
+```
+The best result was out of the detail questions that were handled the best, as out of 34 detailed question it put 15 first and 29 in the top 10, and the worst that it handled was the reworded question because out of 33, it put 0 first and 1 in the top 10.
+```
+
+One way this could mislead you: each kind has only about 33 questions. So the gap between reworded (1 in the top 10) and vague (0) is a single question, and a slightly different set of questions could flip it.
+
+I started the comparison site:
+
+```
+The site is running at http://localhost:8765. Stop it with Ctrl-C.
+```
+
+It should have opened in your browser. It shows one question at a time: the right movie, where TF-IDF ranked it, and TF-IDF's top 10 with the words each movie shares with the question. Pick "TF-IDF missed" in the Show menu to see only the misses.
+
+Look through a few misses of your choice. Then tell me what they have in common. A sentence or two is enough. You can also give me a question's id, like w026, if you want to talk about a specific one.
+
+**User:**
+Looking through the few misses of my choice they all have in common that they are very brief usually one to two sentences and they are not formatted as questions but rather as statements.
 
 <!-- end-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f -->
