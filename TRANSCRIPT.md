@@ -7,7 +7,7 @@ summarized as one-liners.
 <!-- transcript-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f | 2026-10-20T19:02:38.205Z -->
 ## Session `1509da45`, 2026-10-20 19:02:38
 
-*2 user turns. Tool outputs and reasoning omitted.*
+*7 user turns. Tool outputs and reasoning omitted.*
 
 **User:**
 *(ran `/setup`)*
@@ -44,5 +44,80 @@ What's your name, as you'd like it at the top of `WRITEUP.md`?
 
 **User:**
 Nadezhda Dominguez Salinas
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+- 🔧 `Bash`: Refresh transcript and commit name and date
+```
+**Name:** Nadezhda Dominguez Salinas
+**Date:** October 20, 2026
+```
+
+```
+$ python3 dump_transcript.py && git add WRITEUP.md && git commit -m "Name and date"
+Wrote TRANSCRIPT.md: 1 session(s).
+1 session(s) found; this session in TRANSCRIPT.md: yes.
+[main 0425b73] Name and date
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+```
+
+Now Part 0: two predictions. You'll compare two ways of searching for a movie:
+
+Keyword search (TF-IDF) scores a movie by the words its plot summary shares with your question. Embedding search turns your question and each plot summary into a list of numbers, and ranks the movies whose numbers are closest to your question's.
+
+First prediction: **for questions that name a character, place or thing, which method will do better, and why?** A guess is fine, and a sentence or two is enough.
+
+**User:**
+<task-notification>
+<task-id>bfl60a0ra</task-id>
+<tool-use-id>toolu_016sb8svHUYRRpqFuqqcAp1Y</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-logan-Documents-GitHub-comp440-retrieval/1509da45-7e0b-4b7a-8ea5-2836f1df810f/tasks/bfl60a0ra.output</output-file>
+<status>completed</status>
+<summary>Background command "Install packages and download the embedding model" completed (exit code 0)</summary>
+</task-notification>
+
+**Claude:**
+- 🔧 `Read`: /private/tmp/claude-501/-Users-logan-Documents-GitHub-comp440-retrieval/1509da45-7e0b-4b7a-8ea5-2...
+The background install finished. Its last line:
+
+```
+The embedding model is ready: it matches the shipped vectors for 5 test movies.
+```
+
+That means the packages are installed and the embedding model is downloaded and checked.
+
+**User:**
+ok what is next
+
+**Claude:**
+Next is your first prediction. You make it before anything gets searched.
+
+As a reminder, keyword search (TF-IDF) scores a movie by the words its plot summary shares with your question. Embedding search turns your question and each plot summary into a list of numbers, and ranks the movies whose numbers are closest to your question's.
+
+**For questions that name a character, place or thing, which method will do better, and why?** A guess is fine. A sentence or two with one reason is enough.
+
+**User:**
+The method that will perform better is keyword search as it directly scores a movie by the words and thus if we are given a name of something then we can more likely match it to see which words are shared between plot summary and my question.
+
+**Claude:**
+- 🔧 `Edit`: /Users/logan/Documents/GitHub/comp440-retrieval/WRITEUP.md
+The slot now reads:
+
+```
+### Questions that name a character, place or thing: which method will do better, and why?
+
+The method that will perform better is keyword search as it directly scores a movie by the words and thus if we are given a name of something then we can more likely match it to see which words are shared between plot summary and my question.
+```
+
+Second prediction: **for vague descriptions, which method will do better, and why?** A sentence or two with one reason is enough.
+
+**User:**
+For vague descriptions the second method of embedding search will do alot better because it it turns both the question and plot summary into a list of number and ranks based on nearest.
+
+**Claude:**
+The second half of your answer mostly repeats my description of how embedding search works. Could you say in your own words why that would help with vague descriptions? A sentence or two is enough. If you'd rather keep it as written, tell me and I'll write it in exactly as you said it.
+
+**User:**
+In vague description we are less likely to have a one to one match on name of characters, or place in the movie, therefore the embedding search does a better job at matching the closest results to each other than a direct comparison.
 
 <!-- end-session: 1509da45-7e0b-4b7a-8ea5-2836f1df810f -->
