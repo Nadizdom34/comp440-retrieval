@@ -48,11 +48,11 @@ For my first two questions, the movie I was thinking about did not come up in th
 
 ### Which kind of question did TF-IDF handle best, and which worst? By how much?
 
-XXXX
+The best result was out of the detail questions that were handled the best, as out of 34 detailed question it put 15 first and 29 in the top 10, and the worst that it handled was the reworded question because out of 33, it put 0 first and 1 in the top 10.
 
 ### The misses you looked at: what do they have in common?
 
-XXXX
+Looking through the few misses of my choice they all have in common that they are very brief usually one to two sentences and they are not formatted as questions but rather as statements.
 
 ## Part 5: Embeddings
 
