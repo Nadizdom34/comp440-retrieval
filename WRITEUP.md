@@ -20,7 +20,9 @@ In vague description we are less likely to have a one to one match on name of ch
 
 ### The settings you chose, and why
 
-XXXX
+- `REMOVE_STOP_WORDS = True`: because it will make it easier to compare words that are shared between the question and the plot summary
+- `MIN_MOVIES = 3`: because this feels like a fairly low threshold that would not remove many highly relevant words but, also would keep some names of characters that might appear in sequels or more
+- `REPEATS_COUNT_LESS = True`: because it does not add value to count one word multiple times, such as if a word was bike and it appeared multiple times would not add to the compare analysis
 
 ## Part 2: Top terms
 
